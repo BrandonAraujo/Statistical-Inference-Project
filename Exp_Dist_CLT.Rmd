@@ -1,0 +1,24 @@
+##Background
+
+The exponential distribution in R is investigated and compared with the Central Limit Theorem (CLT).
+
+R can simulate exponential distributions with the following function: rexp(n, lambda). The mean of this distribution is $\mu = \frac{1}{\lambda}$ where lambda $\lambda$ is the rate parameter. The standard deviation is $\sigma = \frac{1}{\lambda}$.
+
+CLT explains that a sample consisting of at least 30 independent observations and fairly normally distributed data, the distribution can be notated as: $\bar{x}_{n}$ ~ $N(\mu, \frac{\sigma }{\sqrt{n}})$. This project will demonstrate that the sampling distribution of an exponential distribution with $n = 40$ 
+and $\lambda = 0.2$ is approximately $N(\frac{1}{0.2}, \frac{\frac{1}{0.2}}{\sqrt{40}})$ distributed.
+
+##Simulations
+1000 samples of size 40 are drawn from an $Exp(\frac{1}{0.2}, \frac{1}{0.2})$ distribution with the mean being calculated from each sample thus increasing statistical power. Avereging the means from these samples should give a result near 5.
+
+Library(ggplot2)
+
+Sims <- 1000
+n <- 40
+lambda <- 0.2
+
+set.seed(12)
+
+simMatrix <- matrix(rexp(n = Sims * n, rate = lambda), Sims, n)
+
+simMean <- rowMeans(simulationMatrix)
+
