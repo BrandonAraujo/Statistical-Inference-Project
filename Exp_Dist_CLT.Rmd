@@ -12,13 +12,34 @@ and $\lambda = 0.2$ is approximately $N(\frac{1}{0.2}, \frac{\frac{1}{0.2}}{\sqr
 
 Library(ggplot2)
 
+Create variables
+ 
 Sims <- 1000
+  
 n <- 40
+  
 lambda <- 0.2
 
+Set random seed
+ 
 set.seed(12)
+
+Create a matrix rows corresponding to 1000 simulations and columns corresponding to the 40 random simulations.
 
 simMatrix <- matrix(rexp(n = Sims * n, rate = lambda), Sims, n)
 
-simMean <- rowMeans(simulationMatrix)
+Vector containing the value of each simulations mean
+  
+  simMean <- rowMeans(simulationMatrix)
 
+Create full data frame
+  
+  simData <- data.frame(cbind(simMatrix, simMean))
+
+Create Visualization
+  
+  ggplot(data = simData, aes(simData$simuMean)) + 
+  geom_histogram(breaks = seq(2, 9, by = 0.2), col = "blue", aes(fill = ..count..)) + 
+  labs(title = "Histogram of Mean Distribution", x = "Simulation Means", y = "Frequency") + 
+  geom_vline(aes(xintercept=mean(simData$simMean)), color="red", 
+  linetype="dashed", size=2)
